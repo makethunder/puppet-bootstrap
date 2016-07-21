@@ -25,8 +25,8 @@ if [ "$EUID" -ne "0" ]; then
 fi
 
 # Install wget if we have to (some older Debian versions)
-echo "Installing wget..."
-apt-get install -y wget >/dev/null
+echo "Installing wget and curl..."
+apt-get install -y wget curl >/dev/null
 
 # Install the PuppetLabs repo
 echo "Configuring PuppetLabs repo..."

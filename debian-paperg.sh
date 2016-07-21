@@ -28,6 +28,13 @@ fi
 echo "Installing wget and curl..."
 apt-get install -y wget curl >/dev/null
 
+# Setting timezone to UTC
+echo "Setting timezone to UTC..."
+if [ -f /etc/localtime ]; then
+    rm /etc/localtime
+fi
+ln -s /usr/share/zoneinfo/UTC /etc/localtime
+
 # Install the PuppetLabs repo
 echo "Configuring PuppetLabs repo..."
 repo_deb_path=$(mktemp)

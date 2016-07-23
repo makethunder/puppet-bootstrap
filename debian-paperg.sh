@@ -30,7 +30,6 @@ apt-get install -y wget curl >/dev/null
 
 # Set timezone to UTC
 echo "Setting timezone to UTC..."
-
 echo "Etc/UTC" > /etc/timezone
 dpkg-reconfigure -f noninteractive tzdata
 
@@ -47,10 +46,17 @@ DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -
 
 echo "Puppet installed!"
 
-
 echo "Customizing puppet.conf for PaperG"
 grep paperg /etc/puppet/puppet.conf || sed -i '/\[main\]/a server=puppet.paperg.com\npluginsync=true' /etc/puppet/puppet.conf
 
+echo "Configuring puppet to start"
+DEFAULT_FILE="/etc/default/puppet"
+if [ -f $DEFAULT_FILE ]
+then
+    sed -i 's/START=no/START=yes/' $DEFAULT_FILE
+else
+    echo 'START=yes' >> $DEFAULT_FILE
+fi
+
 echo "Restarting Puppet!"
 service puppet restart
-

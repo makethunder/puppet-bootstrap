@@ -51,15 +51,6 @@ echo "Puppet installed!"
 echo "Customizing puppet.conf for PaperG"
 grep paperg /etc/puppet/puppet.conf || sed -i '/\[main\]/a server=puppet.paperg.com\npluginsync=true' /etc/puppet/puppet.conf
 
-echo "Configuring puppet to start at boot"
-DEFAULT_FILE="/etc/default/puppet"
-if [ -f $DEFAULT_FILE ] && grep -v -Fxq "START=no" $DEFAULT_FILE
-then
-    sed -i 's/START=no/START=yes/' $DEFAULT_FILE
-else
-    echo 'START=yes' >> $DEFAULT_FILE
-fi
-
 echo "Restarting Puppet!"
 service puppet restart
 

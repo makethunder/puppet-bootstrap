@@ -1,0 +1,17 @@
+machine:
+  pre:
+    # install bash syntax checker 'shellcheck'
+    - sudo apt-get update
+    - sudo apt-get -y install shellcheck
+
+test:
+  override:
+    - shellcheck debian-paperg.sh
+
+deployment:
+  release:
+    branch: master
+    owner: makethunder
+    commands:
+      - s3path="s3://s3.aws.paperg.com/circleci/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/"
+      - aws s3 cp debian-paperg.sh "${s3path}/debian-paperg.sh"

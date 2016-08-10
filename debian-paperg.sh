@@ -17,7 +17,7 @@ DISTRIB_CODENAME=$(lsb_release -c -s)
 REPO_DEB_URL="http://apt.puppetlabs.com/puppetlabs-release-${DISTRIB_CODENAME}.deb"
 
 # If wheezy ensure that dotdeb is included to install php 5.5
-if [ "$DISTRIB_CODENAME" == "wheezy" ]; then                                    
+if [ "$DISTRIB_CODENAME" = "wheezy" ]; then                                    
     wget https://www.dotdeb.org/dotdeb.gpg -P /tmp                              
     apt-key add /tmp/dotdeb.gpg                                                                                                                                      
 

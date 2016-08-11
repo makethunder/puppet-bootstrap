@@ -13,5 +13,4 @@ deployment:
     branch: master
     owner: makethunder
     commands:
-      - s3path="s3://s3.aws.paperg.com/circleci/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/"
-      - aws s3 cp debian-paperg.sh "${s3path}/debian-paperg.sh"
+      - aws s3 cp debian-paperg.sh "s3://s3.aws.paperg.com/circleci/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/"

@@ -14,3 +14,4 @@ deployment:
     owner: makethunder
     commands:
       - aws s3 cp debian-paperg.sh "s3://s3.aws.paperg.com/circleci/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/"
+      - aws s3api put-object-acl --acl public-read --bucket s3.aws.paperg.com --key "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}/debian-paperg.sh"

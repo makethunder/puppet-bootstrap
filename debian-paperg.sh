@@ -17,9 +17,9 @@ DISTRIB_CODENAME=$(lsb_release -c -s)
 REPO_DEB_URL="http://apt.puppetlabs.com/puppetlabs-release-${DISTRIB_CODENAME}.deb"
 
 # If wheezy ensure that dotdeb is included to install php 5.6
-if [ "$DISTRIB_CODENAME" = "wheezy" ]; then                                    
-    wget https://www.dotdeb.org/dotdeb.gpg -P /tmp                              
-    apt-key add /tmp/dotdeb.gpg                                                                                                                                      
+if [ "$DISTRIB_CODENAME" = "wheezy" ]; then
+    wget https://www.dotdeb.org/dotdeb.gpg -P /tmp
+    apt-key add /tmp/dotdeb.gpg
 
     debapt="deb http://packages.dotdeb.org wheezy-php56 all"
     debsrc="deb-src http://packages.dotdeb.org wheezy-php56 all"
@@ -27,7 +27,7 @@ if [ "$DISTRIB_CODENAME" = "wheezy" ]; then
     echo "$debsrc" >> /etc/apt/sources.list.d/dotdeb.list
 
     apt-get update
-fi  
+fi
 
 #--------------------------------------------------------------------
 # NO TUNABLES BELOW THIS POINT
@@ -40,6 +40,10 @@ fi
 # Install wget if we have to (some older Debian versions)
 echo "Installing wget and curl..."
 apt-get install -y wget curl >/dev/null
+
+# Remove packages in base install we do not want
+echo "Removing unused packages..."
+apt-get remove -y nfs-common
 
 # Set timezone to UTC
 echo "Setting timezone to UTC..."

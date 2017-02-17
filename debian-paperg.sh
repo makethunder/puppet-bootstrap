@@ -41,6 +41,10 @@ fi
 echo "Installing wget and curl..."
 apt-get install -y wget curl >/dev/null
 
+# Install other useful tools
+echo "Installing common utilities..."
+apt-get install -y git tmux vim
+
 # Remove packages in base install we do not want
 echo "Removing unused packages..."
 apt-get remove -y nfs-common
